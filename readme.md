@@ -20,4 +20,4 @@ The application requires the following environment variables:
 - `DB_PASSWORD`
 - `API_KEY`
 
-See ASSIGNMENT.md for complete assignment instructions.
+See details.md for complete assignment instructions.
