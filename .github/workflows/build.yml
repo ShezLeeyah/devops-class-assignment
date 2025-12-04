@@ -1,0 +1,16 @@
+yaml
+
+name: Reusable Build Workflow
+
+on:
+  workflow_call:
+     inputs:
+       node-version:
+          description:  "Node.js version
+          required: true
+          type: string
+      secrets:
+        DEVOPS_API_KEY:
+          required: true
+ jobs:
+   build:
