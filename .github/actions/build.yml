@@ -1,0 +1,38 @@
+
+
+name: Reusable Build Workflow
+
+on:
+  workflow_call:
+      secrets:
+        DEVOPS_API_KEY:
+          required: true
+        DB_PASSWORD: 
+           required: true
+          NPM_TOKEN:
+            required: true
+             
+ jobs:
+   build-and-run:
+      runs-on: ubuntu-latest
+      
+      steps:
+        -name: Reusable Build Workflow
+        uses:actions/checkout@v4
+      
+      -name: setup Node.js [LTS]
+      uses: actions/setup-node@v4
+      with:
+         node-version: 24
+
+      -name: Generate .env file
+      run: 
+         echo "API_KEY=${{ secrests.DEVOPS_API_KEYAPI_KEY }}" >> .env
+         echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+         echo "NPM_TOKEN=${{ secrets.NPM_TOKEN }}" >> .env
+         echo "Generate .env:"
+         cat .env
+
+         -name: Run Docker container
+          run: 
+             docker run --env-file .env my-app:latest
