@@ -7,17 +7,17 @@ on:
     pull_request:
         - main
         
- jobs:
+jobs:
     build:
        runs-on: ubuntu-latest
-       
-     env:
+
+env:
         DB_HOST: localhost
-        DB_USER: shezleeyah  
-        DB_PASSWORD: hostpassword 
-        API_KEY: 55555 
-        
-      steps:
+        DB_USER: ${{ secrets.DB_USER }} 
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        API_KEY: ${{ secrets.API_KEY }}
+ 
+ steps:
         -name: checkout code
         uses: action/checkout@v4
 
@@ -33,4 +33,3 @@ on:
         run: echo "No tests yet"
         -name: Build Docker image
         run: docker build -t myapp:latest .
-        
