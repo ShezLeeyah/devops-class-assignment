@@ -1,35 +1,13 @@
-name: Node CI pipeline
+name: Node CI Pipeline 
 
 on:
-  push:
+   push:
     branches:
-        - main
-    pull_request:
-        - main
+        -main 
+   pull_request:
+    branches:
+        -main
         
 jobs:
-    build:
-       runs-on: ubuntu-latest
-
-env:
-        DB_HOST: localhost
-        DB_USER: ${{ secrets.DB_USER }} 
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        API_KEY: ${{ secrets.API_KEY }}
- 
- steps:
-        -name: checkout code
-        uses: action/checkout@v4
-
-        -name: set up Node.js
-        uses: actions/setup-node@v4
-        with:
-            node-version: '18'
-
-        -name: install dependencies
-        run: npm install
-        
-        -name: Run app test (if any)
-        run: echo "No tests yet"
-        -name: Build Docker image
-        run: docker build -t myapp:latest .
+  build:
+    runs-on: ubuntu-latest           
