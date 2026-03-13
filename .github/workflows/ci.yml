@@ -14,10 +14,10 @@ jobs:
     
     steps:
        - name: Checkout code
-         uses: actions/checkout@v4 
+         uses: actions/checkout@v4  
 
        - name: Set up node.js
-         uses: actions/setup-node@v4 
+         uses: actions/setup-node@v4  
          with: 
             node-version: '18'
        
@@ -31,10 +31,17 @@ jobs:
            username: ${{ github.actor }} 
            password: ${{ secrets.GHCR_TOKEN }} 
 
+       - name: Convert username to lowercase
+         run: |
+          USERNAME=${{ github.repository_owner }} 
+          USERNAME_LC=$(echo "$USERNAME" | tr '[:upper:]' '[:lower:]') 
+          echo "USERNAME_LC=$USERNAME_LC" >> $GITHUB_ENV
+
        - name: Build and push Docker image
-         uses: docker/build-push-action@v5
+         uses: docker/build-push-action@v5 
          with:
             context: .
             push: true
-            tags: ghcr.io/${{ github.repository_owner }}/myapp:v1 
+            tags: ghcr.oi/${{ env.USERNAME_LC }}/myapp:v1 
+       
       
