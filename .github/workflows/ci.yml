@@ -27,11 +27,11 @@ jobs:
        - name: Login to Github Container Registry
          uses: docker/login-action@v3
          with: 
-           registry: ghcr.io
+           registry: ghcr.io 
            username: ${{ github.actor }} 
            password: ${{ secrets.GHCR_TOKEN }} 
 
-       - name: Convert username to lowercase
+       - name: Convert username to lowercase 
          run: |
           USERNAME=${{ github.repository_owner }} 
           USERNAME_LC=$(echo "$USERNAME" | tr '[:upper:]' '[:lower:]') 
@@ -41,7 +41,7 @@ jobs:
          uses: docker/build-push-action@v5 
          with:
             context: .
-            push: true
-            tags: ghcr.oi/${{ env.USERNAME_LC }}/myapp:v1 
+            push: true 
+            tags: ghcr.io/${{ env.USERNAME_LC }}/myapp:v1 
        
       
